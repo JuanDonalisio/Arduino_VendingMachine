@@ -25,7 +25,7 @@ void conexionServidor() {
 
 void conexionWifi() {
   // SSID y Clave del WiFi
-  Serial1.println("AT+CWJAP=\"Fibertel WiFi997 2.4GHz\",\"panqueques\"");
+  Serial1.println("AT+CWJAP=\"claro\",\"OT4497912\"");
   if (Serial1.find("OK"))
   {
     Serial.println("Conectado a WiFi");
