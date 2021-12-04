@@ -10,7 +10,7 @@ int motor_a_pin= 3;
 int motor_b_pin= 6;
 int motor_c_pin= 7;
 int led_a_pin= 8;
-int led_a_pin= 9;
+int led_b_pin= 9;
 
 
 void conexionServidor() {
@@ -22,7 +22,7 @@ void conexionServidor() {
   else
   {
     Serial.println("Error conectandose al servidor, intentando nuevamente");
-    conectarServidor();
+    conexionServidor();
   }
 }
 
@@ -36,7 +36,7 @@ void conexionWifi() {
   else
   {
     Serial.println("Error conectandose al WiFi, intentando nuevamente");
-    conectarWifi();
+    conexionWifi();
   }
 }
 
@@ -85,7 +85,7 @@ void loop() {
   // put your main code here, to run repeatedly:
   
   digitalWrite(led_a_pin,HIGH);
-  digitalWrite(led_b_pinD,HIGH);
+  digitalWrite(led_b_pin,HIGH);
   tmrpcm.play((char *)"rick.wav");
   
   if (doc["instruccion"] == "musica")
