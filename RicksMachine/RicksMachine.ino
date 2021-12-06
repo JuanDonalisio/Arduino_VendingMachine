@@ -2,6 +2,7 @@
 #include <SoftwareSerial.h>
 #include <SD.h>
 #include <SPI.h>
+#include <ArduinoJson.h>
 #define SD_ChipSelectPin 53
 #include <TMRpcm.h>
 
@@ -87,27 +88,46 @@ void loop() {
   digitalWrite(led_a_pin,HIGH);
   digitalWrite(led_b_pin,HIGH);
   tmrpcm.play((char *)"rick.wav");
+  String sentence;
   
-  if (doc["instruccion"] == "musica")
+  if (Serial1.available())
+  {
+    String frase = Serial1.readString();
+    if (frase.charAt(8) == ':')
+    {
+      sentence = frase.substring(9);
+    }
+    else
+    {
+      sentence = frase.substring(10);
+    }
+    Serial.println(sentence);
+    StaticJsonDocument<300> doc;
+    deserializeJson(doc, sentence);
+    char* instruccion = doc["instruccion"];
+    Serial.println("Instruccion: " + String(instruccion));
+
+    if (doc["instruccion"] == "volumen")
     {
       // Si esta activada, play y si no, parar
     }
 
-  if (doc["instruccion"] == "leds")
+  if (doc["instruccion"] == "luces")
     {
        //Si esta prendido, apagar y y si esta apagado, prender
     }
 
-  if (doc["instruccion"] == "motorA")
+  if (doc["instruccion"] == "item1")
     {
       //Activar 2 segundos 
     }
-  if (doc["instruccion"] == "motorB")
+  if (doc["instruccion"] == "item2")
     {
       //Activar 2 segundos 
     }
-  if (doc["instruccion"] == "motorC")
+  if (doc["instruccion"] == "item3")
     {
       //Activar 2 segundos 
     }
+  }
 }
