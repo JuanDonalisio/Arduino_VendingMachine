@@ -119,27 +119,33 @@ void loop() {
 
   if (doc["instruccion"] == "apagar_luces")
     {
-       digitalWrite(led_a_pin, LOW);
        Serial.println("Apagando luces");
+       digitalWrite(led_a_pin, LOW);
     }
 
     if (doc["instruccion"] == "prender_luces")
     {
-       digitalWrite(led_a_pin, HIGH);
        Serial.println("Prendiendo luces");
+       digitalWrite(led_a_pin, HIGH);
     }
 
   if (doc["instruccion"] == "item1")
     {
-      //Activar 2 segundos 
+      digitalWrite(motor_a_pin, HIGH);
+      delay(2000); 
+      digitalWrite(motor_a_pin, LOW);
     }
   if (doc["instruccion"] == "item2")
     {
-      //Activar 2 segundos 
+      digitalWrite(motor_b_pin, HIGH);
+      delay(2000); 
+      digitalWrite(motor_b_pin, LOW);
     }
   if (doc["instruccion"] == "item3")
     {
-      //Activar 2 segundos 
+      digitalWrite(motor_c_pin, HIGH);
+      delay(2000); 
+      digitalWrite(motor_c_pin, LOW);
     }
   }
 }
