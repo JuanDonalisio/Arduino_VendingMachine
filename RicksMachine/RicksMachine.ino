@@ -58,6 +58,8 @@ void setup() {
   // put your setup code here, to run once:
   pinMode(led_a_pin,OUTPUT);
   pinMode(led_b_pin,OUTPUT);
+  digitalWrite(led_a_pin,HIGH);
+  digitalWrite(led_b_pin,HIGH);
   tmrpcm.speakerPin = 5;
   tmrpcm.quality(1);
   tmrpcm.setVolume(50);
@@ -80,14 +82,12 @@ void setup() {
   delay(1000);
   Serial1.println("Arduino");
   Serial1.setTimeout(250);
+
+  tmrpcm.play((char *)"rick.wav");
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  
-  digitalWrite(led_a_pin,HIGH);
-  digitalWrite(led_b_pin,HIGH);
-  tmrpcm.play((char *)"rick.wav");
   String sentence;
   
   if (Serial1.available())
@@ -101,47 +101,43 @@ void loop() {
     {
       sentence = frase.substring(10);
     }
-    Serial.println(sentence);
-    StaticJsonDocument<300> doc;
-    deserializeJson(doc, sentence);
-    char* instruccion = doc["instruccion"];
-    Serial.println("Instruccion: " + String(instruccion));
+    Serial.println("Instruccion: " + String(sentence));
 
-    if (doc["instruccion"] == "apagar_musica")
+    if (sentence == "apagar_musica")
     {
-      // Si esta activada, play y si no, parar
+       //tmrpcm.stop((char *)"rick.wav");
     }
 
-    if (doc["instruccion"] == "prender_musica")
+    if (sentence == "prender_musica")
     {
-      // Si esta activada, play y si no, parar
+       //tmrpcm.play((char *)"rick.wav");
     }
 
-  if (doc["instruccion"] == "apagar_luces")
+  if (sentence == "apagar_luces")
     {
        Serial.println("Apagando luces");
        digitalWrite(led_a_pin, LOW);
     }
 
-    if (doc["instruccion"] == "prender_luces")
+    if (sentence == "prender_luces")
     {
        Serial.println("Prendiendo luces");
        digitalWrite(led_a_pin, HIGH);
     }
 
-  if (doc["instruccion"] == "item1")
+  if (sentence == "item1")
     {
       digitalWrite(motor_a_pin, HIGH);
       delay(2000); 
       digitalWrite(motor_a_pin, LOW);
     }
-  if (doc["instruccion"] == "item2")
+  if (sentence == "item2")
     {
       digitalWrite(motor_b_pin, HIGH);
       delay(2000); 
       digitalWrite(motor_b_pin, LOW);
     }
-  if (doc["instruccion"] == "item3")
+  if (sentence == "item3")
     {
       digitalWrite(motor_c_pin, HIGH);
       delay(2000); 
