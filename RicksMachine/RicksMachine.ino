@@ -15,7 +15,7 @@ int led_b_pin= 9;
 
 
 void conexionServidor() {
-  Serial1.println("AT+CIPSTART=\"TCP\",\"192.168.100.10\",4000");
+  Serial1.println("AT+CIPSTART=\"TCP\",\"192.168.1.2\",6000");
   if (Serial1.find("OK"))
   {
     Serial.println("Conectado al servidor");
@@ -29,7 +29,7 @@ void conexionServidor() {
 
 void conexionWifi() {
   // SSID y Clave del WiFi
-  Serial1.println("AT+CWJAP=\"claro\",\"OT4497912\"");
+  Serial1.println("AT+CWJAP=\"WiFi-Arnet-b3b1\",\"BC3B8814FD\"");
   if (Serial1.find("OK"))
   {
     Serial.println("Conectado a WiFi");
@@ -107,14 +107,26 @@ void loop() {
     char* instruccion = doc["instruccion"];
     Serial.println("Instruccion: " + String(instruccion));
 
-    if (doc["instruccion"] == "volumen")
+    if (doc["instruccion"] == "apagar_musica")
     {
       // Si esta activada, play y si no, parar
     }
 
-  if (doc["instruccion"] == "luces")
+    if (doc["instruccion"] == "prender_musica")
     {
-       //Si esta prendido, apagar y y si esta apagado, prender
+      // Si esta activada, play y si no, parar
+    }
+
+  if (doc["instruccion"] == "apagar_luces")
+    {
+       digitalWrite(led_a_pin, LOW);
+       Serial.println("Apagando luces");
+    }
+
+    if (doc["instruccion"] == "prender_luces")
+    {
+       digitalWrite(led_a_pin, HIGH);
+       Serial.println("Prendiendo luces");
     }
 
   if (doc["instruccion"] == "item1")
