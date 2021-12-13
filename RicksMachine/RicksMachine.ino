@@ -65,6 +65,9 @@ void setup() {
   pinMode(led_d_pin,OUTPUT);
   pinMode(led_e_pin,OUTPUT);
   pinMode(led_f_pin,OUTPUT);
+  pinMode(motor_a_pin,OUTPUT);
+  pinMode(motor_b_pin,OUTPUT);
+  pinMode(motor_c_pin,OUTPUT);
   digitalWrite(led_a_pin,HIGH);
   digitalWrite(led_b_pin,HIGH);
   digitalWrite(led_c_pin,HIGH);
@@ -132,12 +135,23 @@ void loop() {
     {
        Serial.println("Apagando luces");
        digitalWrite(led_a_pin, LOW);
+       digitalWrite(led_b_pin, LOW);
+       digitalWrite(led_c_pin, LOW);
+       digitalWrite(led_d_pin, LOW);
+       digitalWrite(led_e_pin, LOW);
+       digitalWrite(led_f_pin, LOW);
+      
     }
 
     if (sentence == "prender_luces")
     {
        Serial.println("Prendiendo luces");
        digitalWrite(led_a_pin, HIGH);
+       digitalWrite(led_b_pin, HIGH);
+       digitalWrite(led_c_pin, HIGH);
+       digitalWrite(led_d_pin, HIGH);
+       digitalWrite(led_e_pin, HIGH);
+       digitalWrite(led_f_pin, HIGH);
     }
 
   if (sentence == "item1")
