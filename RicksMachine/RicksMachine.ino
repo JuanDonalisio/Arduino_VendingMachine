@@ -2,7 +2,6 @@
 #include <SoftwareSerial.h>
 #include <SD.h>
 #include <SPI.h>
-#include <ArduinoJson.h>
 #define SD_ChipSelectPin 53
 #include <TMRpcm.h>
 
@@ -75,7 +74,6 @@ void setup() {
   digitalWrite(led_e_pin,HIGH);
   digitalWrite(led_f_pin,HIGH);
 
-  
   Serial1.begin(9600);
   Serial1.setTimeout(10000);
   Serial.begin(9600);
@@ -95,14 +93,6 @@ void setup() {
   tmrpcm.volume(7);
   tmrpcm.loop(1);
   tmrpcm.play("rick.wav");
-  
-  // Le enviamos al servidor en python el tipo de cliente arduino
-  Serial1.println("AT+CIPSEND=7");
-  delay(1000);
-  Serial1.println("Arduino");
-  Serial1.setTimeout(250);
-
-  
 }
 
 void loop() {
