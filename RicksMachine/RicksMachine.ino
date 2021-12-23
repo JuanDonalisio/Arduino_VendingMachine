@@ -75,7 +75,7 @@ void setup() {
   digitalWrite(led_f_pin,HIGH);
 
   Serial1.begin(9600);
-  Serial1.setTimeout(10000);
+  Serial1.setTimeout(1000);
   Serial.begin(9600);
   reiniciar();
   delay(2500);
